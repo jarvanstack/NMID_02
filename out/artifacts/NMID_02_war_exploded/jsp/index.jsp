@@ -178,11 +178,14 @@
 
 
     <!-- 查询学生信息 -->
+    <!--没有接口文档，点击查询，直接转发到这个页面放回 account即可-->
     <section id="search">
-        <h2>查找学生信息(姓名/学号可二选一)</h2>
-        <form action="search" method="post">
-            <input type="text" placeholder="姓名" name="name" value="" />
-            <input type="text" placeholder="学号" name="stdNumber" value="" />
+        <h2>查找学生信息(姓名/学号可二选一)<span style="color:red;">${error}</span> </h2>
+        <form action="${pageContext.request.contextPath}/jsp/account.do" method="post">
+            <!--type="hidden"隐藏表单method-->
+            <input type="hidden"  name="method" value="search"  />
+            <input type="text" placeholder="姓名" name="a_name" value="" />
+            <input type="text" placeholder="学号" name="a_user" value="" />
             <button type="submit">确认查找</button>
         </form>
         <table>
@@ -198,12 +201,13 @@
             </tr>
             </thead>
             <tbody>
+            <!--没有接口文档，点击查询，直接转发到这个页面放回 account即可-->
             <tr>
-                <td>a</td>
-                <td>a</td>
-                <td>a</td>
-                <td>a</td>
-                <td>a</td>
+                <td>${account.getA_name}</td>
+                <td>${account.getA_name}</td>
+                <td>${account.getA_name}</td>
+                <td>${account.getA_name}</td>
+                <td>${account.getA_name}</td>
                 <td>
                     <button style="background:red">删除</button>
                 </td>

@@ -120,8 +120,9 @@
 
     <!-- 添加学生 -->
     <section id="add" class="active">
-        <h2>添加学生</h2>
-        <form action="add" method="post">
+        <h2>添加学生<span style="color:red;">${add}</span> </h2>
+        <form action="${pageContext.request.contextPath}/jsp/account.do" method="post">
+            <input type="hidden" name="method" value="add">
             <input type="text" placeholder="姓名" name="name" />
             <select name="gender">
                 <option value="" disabled="disabled" selected="selected">请选择性别</option>
@@ -145,8 +146,9 @@
 
     <!-- 删除学生 -->
     <section id="delete">
-        <h2>删除学生</h2>
-        <form action="delete" method="delete">
+        <h2>删除学生<span style="color:red;">${delete}</span></h2>
+        <form action="${pageContext.request.contextPath}/jsp/account.do" method="post">
+            <input type="hidden" name="method" value="delete">
             <input type="text" placeholder="学号" name="stdNumber" />
             <button type="submit">确认删除</button>
         </form>
@@ -155,8 +157,9 @@
 
     <!-- 修改学生信息 -->
     <section id="modify">
-        <h2>修改学生信息（依学号修改）</h2>
-        <form action="modify" method="post">
+        <h2>修改学生信息（依学号修改）<span style="color: red">${modify}</span> </h2>
+        <form action="${pageContext.request.contextPath}/jsp/account.do" method="post">
+            <input type="hidden" name="method" value="modify">
             <input type="text" placeholder="姓名" name="name" value="" />
             <select name="gender">
                 <option value="" disabled="disabled" selected="selected">请选择性别</option>
@@ -165,12 +168,13 @@
             </select>
             <input type="text" placeholder="年龄" name="age" value="" />
             <input type="text" placeholder="学号" name="stdNumber" value="" />
-            <select name="major">
+            <select name="major_id">
                 <option value="" disabled="disabled" selected="selected">请选择所在专业</option>
-                <option value="通信工程">通信工程</option>
-                <option value="电子信息工程">电子信息工程</option>
-                <option value="信息工程">信息工程</option>
-                <option value="广播电视工程">广播电视工程</option>
+                <option value="1">软件工程</option>
+                <option value="2">通信工程</option>
+                <option value="3">电子信息工程</option>
+                <option value="4">信息工程</option>
+                <option value="5">广播电视工程</option>
             </select>
             <button type="submit">确认修改</button>
         </form>
@@ -178,11 +182,14 @@
 
 
     <!-- 查询学生信息 -->
+    <!--没有接口文档，点击查询，直接转发到这个页面放回 account即可-->
     <section id="search">
-        <h2>查找学生信息(姓名/学号可二选一)</h2>
-        <form action="search" method="post">
-            <input type="text" placeholder="姓名" name="name" value="" />
-            <input type="text" placeholder="学号" name="stdNumber" value="" />
+        <h2>查找学生信息(姓名/学号可二选一)<span style="color:red;">${error}</span> </h2>
+        <form action="${pageContext.request.contextPath}/jsp/account.do" method="post">
+            <!--type="hidden"隐藏表单method-->
+            <input type="hidden"  name="method" value="search"  />
+            <input type="text" placeholder="姓名" name="a_name" value="" />
+            <input type="text" placeholder="学号" name="a_user" value="" />
             <button type="submit">确认查找</button>
         </form>
         <table>
@@ -198,12 +205,13 @@
             </tr>
             </thead>
             <tbody>
+            <!--没有接口文档，点击查询，直接转发到这个页面放回 account即可-->
             <tr>
-                <td>a</td>
-                <td>a</td>
-                <td>a</td>
-                <td>a</td>
-                <td>a</td>
+                <td>${account.getA_name}</td>
+                <td>${account.getA_name}</td>
+                <td>${account.getA_name}</td>
+                <td>${account.getA_name}</td>
+                <td>${account.getA_name}</td>
                 <td>
                     <button style="background:red">删除</button>
                 </td>

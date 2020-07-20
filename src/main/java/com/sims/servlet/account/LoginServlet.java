@@ -1,4 +1,4 @@
-package com.sims.servlet.user;
+package com.sims.servlet.account;
 
 import com.sims.pojo.Account;
 import com.sims.service.account.AccountService;
@@ -32,7 +32,7 @@ public class LoginServlet extends HttpServlet {
         if (flag) {
             //如果查询成功 设置session + 转发到 index.jsp
             req.getSession().setAttribute(Constants01.USER_SERSSION,_account);
-            req.getRequestDispatcher("/jsp/index.jsp").forward(req,resp);
+            resp.sendRedirect("jsp/index.jsp");
         }else{
             //如果 登录失败 转发会原页面 + error
             req.setAttribute("error","账号或密码错误");

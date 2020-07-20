@@ -19,6 +19,16 @@ public class Account {
     private Integer age ; //计算得出
     private String major_name; //专业名称 连表 13
 
+    private Integer userlessAge ;
+
+    public Integer getUserlessAge() {
+        return userlessAge;
+    }
+
+    public void setUserlessAge(Integer userlessAge) {
+        this.userlessAge = userlessAge;
+    }
+
     public Integer getA_id() {
         return a_id;
     }

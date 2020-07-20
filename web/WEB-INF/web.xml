@@ -29,11 +29,24 @@
     <!--配置登录/login.do-->
     <servlet>
         <servlet-name>LoginServlet</servlet-name>
-        <servlet-class>com.sims.servlet.user.LoginServlet</servlet-class>
+        <servlet-class>com.sims.servlet.account.LoginServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>
         <url-pattern>/login.do</url-pattern>
+    </servlet-mapping>
+    <!--/jsp/account.do 账号的所有操作-->
+    <servlet>
+        <servlet-name>AccountServlet</servlet-name>
+        <servlet-class>com.sims.servlet.account.AccountServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>AccountServlet</servlet-name>
+        <url-pattern>/jsp/account.do</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AccountServlet</servlet-name>
+        <url-pattern>/account.do</url-pattern>
     </servlet-mapping>
 
 </web-app>
