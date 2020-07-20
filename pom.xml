@@ -8,9 +8,6 @@
     <artifactId>NMID_02</artifactId>
     <packaging>pom</packaging>
     <version>1.0-SNAPSHOT</version>
-    <modules>
-        <module>sims_1_0</module>
-    </modules>
     <dependencies>
         <!-- Druid数据源使用https://mvnrepository.com/artifact/com.alibaba/druid -->
         <dependency>
