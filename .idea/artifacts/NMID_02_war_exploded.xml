@@ -2,10 +2,24 @@
   <artifact type="exploded-war" name="NMID_02:war exploded">
     <output-path>$PROJECT_DIR$/out/artifacts/NMID_02_war_exploded</output-path>
     <root id="root">
-      <element id="javaee-facet-resources" facet="NMID_02/web/Web" />
       <element id="directory" name="WEB-INF">
         <element id="directory" name="classes">
           <element id="module-output" name="NMID_02" />
+        </element>
+        <element id="directory" name="lib">
+          <element id="library" level="project" name="Maven: com.alibaba:druid:1.1.23" />
+          <element id="library" level="project" name="Maven: javax.servlet.jsp.jstl:jstl:1.2" />
+          <element id="library" level="project" name="Maven: taglibs:standard:1.1.2" />
+          <element id="library" level="project" name="Maven: mysql:mysql-connector-java:8.0.20" />
+          <element id="library" level="project" name="Maven: com.google.protobuf:protobuf-java:3.6.1" />
+          <element id="library" level="project" name="Maven: junit:junit:4.12" />
+          <element id="library" level="project" name="Maven: org.hamcrest:hamcrest-core:1.3" />
+        </element>
+      </element>
+      <element id="javaee-facet-resources" facet="NMID_02/web/Web" />
+      <element id="archive" name="archive.jar">
+        <element id="directory" name="META-INF">
+          <element id="file-copy" path="$PROJECT_DIR$/web/META-INF/MANIFEST.MF" />
         </element>
       </element>
     </root>
