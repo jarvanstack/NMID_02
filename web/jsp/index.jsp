@@ -207,11 +207,11 @@
             <tbody>
             <!--没有接口文档，点击查询，直接转发到这个页面放回 account即可-->
             <tr>
-                <td>${account.getA_name}</td>
-                <td>${account.getA_name}</td>
-                <td>${account.getA_name}</td>
-                <td>${account.getA_name}</td>
-                <td>${account.getA_name}</td>
+                <td>${_account.getA_name}</td>
+                <td>${_account.getUserlessAge}</td>
+                <td>${_account.getA_gender}</td>
+                <td>${_account.getA_user}</td>
+                <td>${_account.getMajor_name}</td>
                 <td>
                     <button style="background:red">删除</button>
                 </td>

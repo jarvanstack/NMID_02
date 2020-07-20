@@ -1,12 +1,16 @@
 package com.sims.servlet.account;
 
+import com.alibaba.fastjson.JSONArray;
+import com.mysql.cj.xdevapi.JsonArray;
 import com.sims.pojo.Account;
 import com.sims.service.account.AccountService;
 import com.sims.service.account.AccountServiceImpl;
 import com.sims.util.Constants01;
 import com.sims.util.StringUtil01;
+import com.sims.util.jdbcPool.JdbcPool02;
 
 import javax.servlet.ServletException;
+import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -45,6 +49,7 @@ public class AccountServlet extends HttpServlet {
 
     //查询
     private void search(HttpServletRequest req, HttpServletResponse resp) {
+        System.out.println("-----start search ---");
         boolean flag = false;
         String a_name = req.getParameter("a_name");
         String a_user = req.getParameter("a_user");//学号就是 登录名称
@@ -66,28 +71,24 @@ public class AccountServlet extends HttpServlet {
             flag = true;
         }
 
-        if (flag) {
-            //如果查询成功
-            req.setAttribute("account", account);
+        //返回json数据
+        ServletOutputStream out = null;
+        resp.setContentType("application/json");
+        try {
+             out = resp.getOutputStream();
+             out.write(JSONArray.toJSONBytes(_account));
+             out.flush();
+            System.out.println("--------  "+_account.getA_name());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }finally {
             try {
-                req.getRequestDispatcher("").forward(req, resp);
-            } catch (ServletException e) {
-                e.printStackTrace();
+                out.close();
             } catch (IOException e) {
                 e.printStackTrace();
             }
-        } else {
-            //如果查询失败
-            req.setAttribute("error", "查询失败");
-            try {
-                req.getRequestDispatcher("").forward(req, resp);
-            } catch (ServletException e) {
-                e.printStackTrace();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-
         }
+
 
     }
 
@@ -100,7 +101,13 @@ public class AccountServlet extends HttpServlet {
         String major_id = req.getParameter("major_id");
         Account account = new Account();
         account.setA_user(a_user);//设置user登录名，通过登录名获取Account，在Account的基础上修改
-        //
+        System.out.println("------error: "+a_gender);
+        //设置a_gender
+        if (a_gender.equals("男")) {
+            a_gender = "1";
+        }else {
+            a_gender = "2";
+        }
         Account _account = accountService.login(account);
         //major = accountService.getMajorByMajorId(major_id);//设置的时候不用，获取就可以了。
         _account.setA_name(a_name);
@@ -121,7 +128,7 @@ public class AccountServlet extends HttpServlet {
             //如果修改modify成功
             req.setAttribute("modify", "修改成功");
             try {
-                req.getRequestDispatcher("").forward(req, resp);
+                req.getRequestDispatcher("index.jsp").forward(req, resp);
             } catch (ServletException e) {
                 e.printStackTrace();
             } catch (IOException e) {
@@ -131,7 +138,7 @@ public class AccountServlet extends HttpServlet {
             //如果modify失败
             req.setAttribute("modify", "查询失败");
             try {
-                req.getRequestDispatcher("").forward(req, resp);
+                req.getRequestDispatcher("index.jsp").forward(req, resp);
             } catch (ServletException e) {
                 e.printStackTrace();
             } catch (IOException e) {
@@ -150,6 +157,13 @@ public class AccountServlet extends HttpServlet {
         String a_user = req.getParameter("stdNumber");
         String major_id = req.getParameter("major");//5.
         Account _account = new Account();
+        System.out.println("---------error  "+a_gender);
+        //设置a_gender
+        if (a_gender.equals("男")) {//
+            a_gender = "1";
+        }else {
+            a_gender = "2";
+        }
         _account.setA_name(a_name);
         _account.setA_gender(Integer.parseInt(a_gender));
         _account.setUserlessAge(Integer.parseInt(uselessAge));
@@ -169,7 +183,7 @@ public class AccountServlet extends HttpServlet {
             //如果修改add成功
             req.setAttribute("add", "添加成功");
             try {
-                req.getRequestDispatcher("").forward(req, resp);
+                req.getRequestDispatcher("index.jsp").forward(req, resp);
             } catch (ServletException e) {
                 e.printStackTrace();
             } catch (IOException e) {
@@ -179,7 +193,7 @@ public class AccountServlet extends HttpServlet {
             //如果add失败
             req.setAttribute("add", "添加失败");
             try {
-                req.getRequestDispatcher("").forward(req, resp);
+                req.getRequestDispatcher("index.jsp").forward(req, resp);
             } catch (ServletException e) {
                 e.printStackTrace();
             } catch (IOException e) {
@@ -210,7 +224,7 @@ public class AccountServlet extends HttpServlet {
             //如果delete成功
             req.setAttribute("delete", "delete成功");
             try {
-                req.getRequestDispatcher("").forward(req, resp);
+                req.getRequestDispatcher("index.jsp").forward(req, resp);
             } catch (ServletException e) {
                 e.printStackTrace();
             } catch (IOException e) {
@@ -220,7 +234,7 @@ public class AccountServlet extends HttpServlet {
             //如果delete失败
             req.setAttribute("delete", "delete失败");
             try {
-                req.getRequestDispatcher("").forward(req, resp);
+                req.getRequestDispatcher("index.jsp").forward(req, resp);
             } catch (ServletException e) {
                 e.printStackTrace();
             } catch (IOException e) {
